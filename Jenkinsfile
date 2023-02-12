@@ -22,8 +22,6 @@ pipeline {
           sh '''
             echo "IMAGE_TAG: $IMAGE_TAG"
             echo "CI_IMAGE_TAG: $CI_IMAGE_TAG"
-            aws ecr get-login --no-include-email --region $REGISTRY_REGION | sh
-            docker pull $REGISTRY/$SERVICE:latest
             docker build \
               --target deploy \
               --cache-from $REGISTRY/$SERVICE:latest \
@@ -34,8 +32,6 @@ pipeline {
               --cache-from $REGISTRY/$SERVICE:$IMAGE_TAG \
               -t $REGISTRY/$SERVICE:$CI_IMAGE_TAG \
               --build-arg IMAGE_TAG .
-            docker push $REGISTRY/$SERVICE:$CI_IMAGE_TAG
-            docker push $REGISTRY/$SERVICE:$IMAGE_TAG
           '''
         }
       }
