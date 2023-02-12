@@ -19,7 +19,7 @@ pipeline {
         }
         node('docker') {
           checkout scm
-          sh 'docker build --cache-from $SERVICE:latest -t $SERVICE/$IMAGE_TAG .'
+          sh 'docker build -t $SERVICE/$IMAGE_TAG .'
         }
       }
       post {
