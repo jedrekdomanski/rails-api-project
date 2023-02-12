@@ -17,7 +17,6 @@ pipeline {
         script {
           startTime = new Date().getTime()
         }
-        incrementMetrics(metric: "jenkinsBuild", service: "${SERVICE}", stage: "builds", branch: "${BRANCH}")
         node('docker') {
           checkout scm
           sh '''
