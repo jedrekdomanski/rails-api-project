@@ -40,7 +40,7 @@ pipeline {
               echo "EXCEPTION: ${exc}"
               throw exc
             } finally {
-              sh 'docker-compose -f docker-compose.ci.yml down'
+              sh 'docker-compose -f docker-compose.yml down'
               deleteDir()
             }
           }
