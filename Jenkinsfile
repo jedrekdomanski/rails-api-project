@@ -24,12 +24,10 @@ pipeline {
             echo "CI_IMAGE_TAG: $CI_IMAGE_TAG"
             docker build \
               --target deploy \
-              --cache-from $REGISTRY/$SERVICE:latest \
               -t $REGISTRY/$SERVICE:$IMAGE_TAG \
               --build-arg IMAGE_TAG .
             docker build \
               --target ci \
-              --cache-from $REGISTRY/$SERVICE:$IMAGE_TAG \
               -t $REGISTRY/$SERVICE:$CI_IMAGE_TAG \
               --build-arg IMAGE_TAG .
           '''
