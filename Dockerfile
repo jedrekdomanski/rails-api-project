@@ -1,4 +1,4 @@
-FROM ruby:2.7.6-alpine
+FROM ruby:2.7.6-alpine as base
 
 RUN echo "@edge http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories
 
