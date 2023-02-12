@@ -1,5 +1,5 @@
 pipeline {
-  agent { label 'builder' }
+  agent { label 'docker' }
 
   environment {
     BRANCH = env.BRANCH_NAME.replace('/', '-')
@@ -25,6 +25,25 @@ pipeline {
       post {
         always {
           deleteDir()
+        }
+      }
+    }
+
+    stage('test') {
+      steps {
+        script {
+          node('docker') {
+            try {
+              sh 'docker-compose -f docker-compose.ci.yml up -d'
+              sh 'docker-compose -f docker-compose.ci.yml run web rspec RAILS_ENV=test DISABLE_DATABASE_ENVIRONMENT_CHECK=1'
+            } catch (exc) {
+              echo "EXCEPTION: ${exc}"
+              throw exc
+            } finally {
+              sh 'docker-compose -f docker-compose.ci.yml down'
+              deleteDir()
+            }
+          }
         }
       }
     }
