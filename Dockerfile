@@ -52,7 +52,7 @@ RUN rm -rf /root/.ssh
 # Dev Image
 FROM base as dev
 
-RUN bundle install --with development
+RUN bundle install
 
 RUN apk update && apk upgrade && apk --no-cache add \
   curl-dev \
@@ -68,9 +68,7 @@ RUN apk update && apk upgrade && apk --no-cache add \
   postgresql \
   && echo ‘gem: --no-document’ > /etc/gemrc
 
-RUN bundle install \
-  --with test \
-  --deployment
+RUN bundle install
 
 RUN rm -rf /root/.ssh
 
