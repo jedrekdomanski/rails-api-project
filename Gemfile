@@ -6,9 +6,9 @@ ruby '2.7.6'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 7.0.4.2'
 # Use postgresql as the database for Active Record
-gem 'pg', '~> 1.4'
+gem 'pg'
 # Use Puma as the app server
-gem 'puma', '~> 5.6.4'
+gem 'puma'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 # gem 'jbuilder', '~> 2.7'
 # Use Redis adapter to run Action Cable in production
@@ -20,15 +20,15 @@ gem 'puma', '~> 5.6.4'
 # gem 'image_processing', '~> 1.2'
 
 # Reduces boot times through caching; required in config/boot.rb
-gem 'bootsnap', '>= 1.4.4', require: false
+gem 'bootsnap', require: false
 
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
-# gem 'rack-cors'
+gem 'rack-cors'
 
 # Services API
-gem 'grape', '~> 1.6'
-gem 'grape-entity', '~> 0.10'
-gem 'grape_logging', '~> 1.8'
+gem 'grape'
+gem 'grape-entity'
+gem 'grape_logging'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -44,6 +44,9 @@ group :development do
 end
 
 group :test do
+  # Removes DB records after running specs
+  gem 'database_cleaner', '~> 2.0.1'
+
   gem 'guard-rspec', require: false
   gem 'rspec-rails'
 end
