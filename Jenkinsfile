@@ -19,7 +19,7 @@ pipeline {
         }
         node('docker') {
           checkout scm
-          sh 'docker build -t $SERVICE/$IMAGE_TAG .'
+          sh 'docker build --cache-from $SERVICE:latest -t $SERVICE/$IMAGE_TAG .'
         }
       }
       post {
@@ -35,7 +35,7 @@ pipeline {
           node('docker') {
             try {
               sh 'docker-compose -f docker-compose.yml up -d'
-              sh 'docker-compose -f docker-compose.yml run web rspec RAILS_ENV=test DISABLE_DATABASE_ENVIRONMENT_CHECK=1'
+              sh 'docker-compose -f docker-compose.yml run web bundle exec rspec RAILS_ENV=test DISABLE_DATABASE_ENVIRONMENT_CHECK=1'
             } catch (exc) {
               echo "EXCEPTION: ${exc}"
               throw exc
