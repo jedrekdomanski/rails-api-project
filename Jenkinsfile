@@ -18,7 +18,7 @@ pipeline {
           startTime = new Date().getTime()
         }
         incrementMetrics(metric: "jenkinsBuild", service: "${SERVICE}", stage: "builds", branch: "${BRANCH}")
-        node('builder') {
+        node('docker') {
           checkout scm
           sh '''
             echo "IMAGE_TAG: $IMAGE_TAG"
