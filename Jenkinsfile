@@ -19,18 +19,7 @@ pipeline {
         }
         node('docker') {
           checkout scm
-          sh '''
-            echo "IMAGE_TAG: $IMAGE_TAG"
-            echo "CI_IMAGE_TAG: $CI_IMAGE_TAG"
-            docker build \
-              --target deploy \
-              -t $REGISTRY/$SERVICE:$IMAGE_TAG \
-              --build-arg IMAGE_TAG .
-            docker build \
-              --target ci \
-              -t $REGISTRY/$SERVICE:$CI_IMAGE_TAG \
-              --build-arg IMAGE_TAG .
-          '''
+          sh 'docker build -t $SERVICE/$IMAGE_TAG .'
         }
       }
       post {
