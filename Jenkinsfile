@@ -1,4 +1,4 @@
-pipeline {
+Jenkinsfilepipeline {
   agent { label 'docker' }
 
   environment {
@@ -34,7 +34,6 @@ pipeline {
         script {
           node('docker') {
             try {
-              sh 'docker-compose -f docker-compose.yml up -d'
               sh 'docker-compose -f docker-compose.yml run web bundle exec rspec RAILS_ENV=test DISABLE_DATABASE_ENVIRONMENT_CHECK=1'
             } catch (exc) {
               echo "EXCEPTION: ${exc}"
