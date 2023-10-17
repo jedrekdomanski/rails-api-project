@@ -13,4 +13,10 @@ test:
   username: postgres
   database: rails_api_project_test
   password: postgres
-
+production:
+  adapter: postgresql
+  host: postgres
+  encoding: unicode
+  pool: 10
+  username: postgres
+  database: rails_api_project_development
