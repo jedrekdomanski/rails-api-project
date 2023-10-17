@@ -9,10 +9,15 @@ module Services
   class Api < Grape::API
     API_VERSION = 1.0
     format :json
-    content_type :json, 'application/json'
+    prefix :services
 
     helpers SharedHelpers
+
+    after do
+      header 'X-Version', API_VERSION.to_s
+    end
+
     mount Hello
-    mount Services::Endpoints::V1::Customers
+    mount Services::Endpoints::V1::Routes
   end
 end

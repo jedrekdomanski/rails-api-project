@@ -1,0 +1,47 @@
+require:
+  - rubocop-rspec
+
+AllCops:
+  TargetRubyVersion: 2.7
+  NewCops: enable
+  Exclude:
+    - 'db/schema.rb'
+    - 'db/migrate/*'
+
+### STYLE COPS ###
+# Disable Cop that insist on documentation before each class
+Style/Documentation:
+  Enabled: false
+
+# Prefer single quotes unless you are using interpolation or need to escape a single-quote
+Style/StringLiterals:
+  EnforcedStyle: single_quotes
+
+# Preference on this one is spread 50-50 so we decided to use no_comma as
+# it was more widely used in a project
+Style/TrailingCommaInArrayLiteral:
+  EnforcedStyleForMultiline: no_comma
+
+Style/TrailingCommaInHashLiteral:
+  EnforcedStyleForMultiline: no_comma
+
+### METRICS COPS ###
+
+Layout/LineLength:
+  Max: 120
+  Exclude:
+    - "config/**/*"
+
+# Disable Module and Block Length in test files
+Metrics/ModuleLength:
+  Exclude:
+    - "spec/**/*"
+
+Metrics/BlockLength:
+  Exclude:
+    - "spec/**/*"
+
+RSpec/MultipleDescribes:
+  Enabled: false
+RSpec/MultipleExpectations:
+  Enabled: false

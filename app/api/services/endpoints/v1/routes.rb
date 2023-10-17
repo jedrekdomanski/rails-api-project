@@ -7,8 +7,9 @@ module Services
         version 'v1', using: :path
         format :json
 
-        prefix :api
-
+        namespace :customers do
+          mount Services::Endpoints::V1::Customers::Find
+        end
       end
     end
   end

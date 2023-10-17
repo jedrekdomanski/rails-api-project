@@ -22,7 +22,6 @@ RUN apk update && apk upgrade && apk add build-base && apk --no-cache add \
   gmp-dev \
   musl \
   gcompat \
-  aws-cli@edge \
   shared-mime-info \
   libucontext-dev \
   && echo ‘gem: --no-document’ > /etc/gemrc 
